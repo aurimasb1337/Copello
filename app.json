@@ -1,0 +1,37 @@
+{
+  "name": "Copello",
+  "displayName": "Copello",
+  "expo": {
+    "name": "Copello",
+    "slug": "Copello",
+    "version": "1.0.0",
+    "sdkVersion": "47.0.0",
+    "splash": {
+
+      "resizeMode": "contain",
+      "backgroundColor": "#1e8bd4"
+    },
+    "platforms": [
+      "ios",
+      "android"
+   
+    ],
+    "packagerOpts": {
+      "sourceExts": ["cjs"]
+    },
+    "android": {
+      "package": "com.copello.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBHACzImxOl4LJZAfYd9Nu8xD6mGkXSLCk"
+        }
+    }
+    },
+    "ios": {
+      "supportsTablet": true,
+      "config": {
+          "googleMapsApiKey": "AIzaSyBHACzImxOl4LJZAfYd9Nu8xD6mGkXSLCk"
+      }
+    }
+  }
+}
