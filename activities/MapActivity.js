@@ -1,4 +1,4 @@
-import { View , AppState} from "react-native";
+import { View , AppState, NativeModules} from "react-native";
 import MapView, {  Circle, Marker, MarkerAnimated, PROVIDER_GOOGLE  } from "react-native-maps";
 import Svg, {Path, Ellipse, Image, SvgXml } from 'react-native-svg'
 import {darkStyle} from '../styles/mapStyle';
@@ -11,7 +11,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'; //-->add
 import 'react-native-gesture-handler'
 import AnimatedCarousel from '../carousel/AnimatedCarousel';
 import * as Location from 'expo-location';
-import {PulseAnimation} from 'react-native-animated-pulse';
+import ExpoLocation from "../services/ExpoLocation";
+
+
 
 
 const initialCords = {
@@ -57,6 +59,9 @@ const snapPoints = useMemo(() => ['25%', '50%'], []);
 useEffect(() => {
   const database = getDatabase()
   const dbRef = ref(database, `locations` )
+  const auth = getAuth();
+signInAnonymously(auth)
+
   onValue(dbRef, (snapshot) => {
 
     if(snapshot.exists()){
@@ -147,7 +152,7 @@ useEffect(() => {
 
 const appState = useRef(AppState.currentState);
 const [appStateVisible, setAppStateVisible] = useState(appState.current);
-
+const [stateCount, setCount] = useState(0);
 useEffect(() => {
   const subscription = AppState.addEventListener("change", nextAppState => {
     if (
@@ -156,6 +161,19 @@ useEffect(() => {
     ) {
       console.log("App has come to the foreground!");
       // onResume
+      setCount(Math.random())
+      //NativeModules.DevSettings.reload();
+      if(locations && locations.length>0)
+      {
+       const payload = {
+         ...initialCords,
+         latitude: locations[0].latitude,
+         longitude: locations[0].longitude
+       }
+   
+      setActiveLoc(payload)
+      }
+   
     }
 
     appState.current = nextAppState;
@@ -168,7 +186,7 @@ useEffect(() => {
   };
 }, []);
  
-
+console.log(stateCount)
    const handleSheetChanges = useCallback((index) => {
   
    }, []);
@@ -191,6 +209,8 @@ useEffect(() => {
       
       }}
     >
+      
+   <ExpoLocation/>
       <MapView
       provider={PROVIDER_GOOGLE}
       ref={mapRef}
@@ -218,6 +238,7 @@ useEffect(() => {
           onPress={(marker) => setActiveLoc({...marker.nativeEvent.coordinate}) }
           icon={require('../cop.png')}
           >
+
       {/* <View style={{padding:50}} >
       <PulseAnimation color={'#34ebba'}  diameter={100} speed={1800} numPulses={2}  duration={3000} ></PulseAnimation>
       <Text style={{textAlign: 'center', marginTop: -5}}>👮</Text>
@@ -273,7 +294,7 @@ useEffect(() => {
           
         <View style={styles.contentContainer}>
        
-        <AnimatedCarousel setActiveLoc={setActiveLoc} data={locations}/>
+        <AnimatedCarousel setActiveLoc={setActiveLoc} activeLoc={activeLoc} hook={stateCount} data={locations}/>
 
      
         </View>

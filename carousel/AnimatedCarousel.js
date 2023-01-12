@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
@@ -9,6 +10,8 @@ import { Divider } from '@rneui/themed';
 const PoliceItem = (props) => {
   
     const {index, data} = props
+  
+
    return (
         <LinearGradient colors={['#4434ba', '#1e61e8']}  style={{
             shadowColor: '#171717',
@@ -73,19 +76,31 @@ const PoliceItem = (props) => {
       </LinearGradient>
     )
 }
-function AnimatedCarousel({data, setActiveLoc}) {
+function AnimatedCarousel({data, setActiveLoc, hook}) {
  
     const width = Dimensions.get('window').width;
+
+    const ref = useRef(null);
+   
+
+    useEffect(() => {
+      if(hook && ref && data){
+        console.log(ref)
+          console.log('hook')
+        ref?.current.scrollTo(data.length-1)
+      }
+    }, [hook, data])
     return (
         <View style={{ flex: 1, padding:20 }}>
             <Carousel
+            ref={ref}
                 loop
                 width={width}
                 height={width / 1.5}
                 autoPlay={false}
                 data={data}
                 scrollAnimationDuration={1000}
-           
+               key={hook}
                 parallaxScrollingScale={0.9}
                 mode="parallax"
                 onSnapToItem={(index) => setActiveLoc({

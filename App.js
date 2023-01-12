@@ -4,6 +4,7 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import MapActivity from "./activities/MapActivity";
 import { app } from "./firebase/config";
 import { ref, onValue, getDatabase, set } from "firebase/database"
+
 export default function App() {
   
   const [fontsLoaded] = useFonts({
