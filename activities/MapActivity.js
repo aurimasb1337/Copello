@@ -216,12 +216,12 @@ useEffect(() => {
      
           coordinate={{latitude:loc.latitude, longitude: loc.longitude}} 
           onPress={(marker) => setActiveLoc({...marker.nativeEvent.coordinate}) }
-          // icon={require('../cop.png')}
+          icon={require('../cop.png')}
           >
-      <View style={{padding:50}} >
+      {/* <View style={{padding:50}} >
       <PulseAnimation color={'#34ebba'}  diameter={100} speed={1800} numPulses={2}  duration={3000} ></PulseAnimation>
       <Text style={{textAlign: 'center', marginTop: -5}}>👮</Text>
-      </View>
+      </View> */}
           </Marker>
           )
         }
