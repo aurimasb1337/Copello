@@ -85,9 +85,15 @@ function AnimatedCarousel({data, setActiveLoc, hook}) {
 
     useEffect(() => {
       if(hook && ref && data){
-        console.log(ref)
-          console.log('hook')
-        ref?.current.scrollTo(data.length-1)
+     
+        ref?.current.scrollTo(0)
+        const payload = {
+          
+            latitude: data[0].latitude,
+            longitude: data[0].longitude
+          }
+      
+          setActiveLoc(payload)
       }
     }, [hook, data])
     return (
