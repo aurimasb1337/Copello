@@ -187,7 +187,7 @@ useEffect(() => {
   };
 }, []);
  
-console.log(stateCount)
+
    const handleSheetChanges = useCallback((index) => {
   
    }, []);
