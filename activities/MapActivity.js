@@ -12,6 +12,7 @@ import 'react-native-gesture-handler'
 import AnimatedCarousel from '../carousel/AnimatedCarousel';
 import * as Location from 'expo-location';
 import ExpoLocation from "../services/ExpoLocation";
+import UserLocation from "../services/UserLocation";
 
 
 
@@ -209,7 +210,7 @@ console.log(stateCount)
       
       }}
     >
-      
+      <UserLocation/>
    <ExpoLocation/>
       <MapView
       provider={PROVIDER_GOOGLE}

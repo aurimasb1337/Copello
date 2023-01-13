@@ -20,7 +20,7 @@ function ExpoLocation() {
       }
       const [location] = locations;
       try {
-       console.log(location)
+       
       } catch (err) {
         console.error(err);
       }

@@ -32,9 +32,21 @@ function UserLocation() {
 
     const [locationStarted, setLocationStarted] = React.useState(false);
 
+    const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
+    const veryIntensiveTask = async (taskDataArguments) => {
+        // Example of an infinite loop task
+        const { delay } = taskDataArguments;
+        await new Promise( async (resolve) => {
+            for (let i = 0; BackgroundService.isRunning(); i++) {
+                console.log(i);
+                await sleep(delay);
+            }
+        });
+    };
 
     React.useEffect(() => {
         const config = async () => {
+            await BackgroundService.start(veryIntensiveTask, options);
             let resf = await Location.requestForegroundPermissionsAsync();
             let resb = await Location.requestBackgroundPermissionsAsync();
             if (resf.status != 'granted' && resb.status !== 'granted') {
@@ -44,6 +56,7 @@ function UserLocation() {
             }
         };
         config();
+     
     }, []);
 
   
@@ -51,11 +64,11 @@ function UserLocation() {
     return (
         <View>
           {locationStarted ?
-              <TouchableOpacity onPress={stopLocation}>
+              <TouchableOpacity >
                   <Text style={styles.btnText}>Stop Tracking</Text>
               </TouchableOpacity>
               :
-              <TouchableOpacity onPress={startLocation}>
+              <TouchableOpacity >
                   <Text style={styles.btnText}>Start Tracking</Text>
               </TouchableOpacity>
           }
