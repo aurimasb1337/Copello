@@ -24,7 +24,7 @@
       "package": "com.copello.app",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyBHACzImxOl4LJZAfYd9Nu8xD6mGkXSLCk"
+        
         }
       },
       "permissions": [
@@ -34,7 +34,7 @@
     "ios": {
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyBHACzImxOl4LJZAfYd9Nu8xD6mGkXSLCk"
+       
       },
       "infoPlist": {
         "UIBackgroundModes": [

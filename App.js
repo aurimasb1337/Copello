@@ -1,25 +1,26 @@
-import { View } from "react-native";
+import { View, AppRegistry } from "react-native";
 import { useFonts } from 'expo-font';
 import React, { useCallback, useMemo, useRef } from 'react';
 import MapActivity from "./activities/MapActivity";
 import { app } from "./firebase/config";
+import { name as appName } from './app.json';
 import { ref, onValue, getDatabase, set } from "firebase/database"
 import * as TaskManager from 'expo-task-manager'
-// const TASK_FETCH_LOCATION = 'background-location-task';
-//    // 1 define the task passing its name and a callback that will be called whenever the location changes
-//    TaskManager.defineTask(TASK_FETCH_LOCATION, async ({ data: { locations }, error }) => {
-//     if (error) {
-//       console.error(error);
-//       return;
-//     }
-//     const [location] = locations;
-//   console.log('app.js', location)
-//     try {
+const TASK_FETCH_LOCATION = 'background-location-task';
+   // 1 define the task passing its name and a callback that will be called whenever the location changes
+   TaskManager.defineTask(TASK_FETCH_LOCATION, async ({ data: { locations }, error }) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    const [location] = locations;
+  console.log('app.js', location)
+    try {
      
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   });
+    } catch (err) {
+      console.error(err);
+    }
+  });
 export default function App() {
   
   const [fontsLoaded] = useFonts({
@@ -43,3 +44,5 @@ export default function App() {
 const SplashScreen = () => {
   return <View></View>
 }
+
+AppRegistry.registerComponent(appName, () => App);
