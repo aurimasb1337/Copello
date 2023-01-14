@@ -19,12 +19,12 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
-export const storage = getStorage();
-export const db = getFirestore()
+// export const storage = getStorage();
+// export const db = getFirestore()
 export const database = getDatabase()
 let analytics
 if (app.name && typeof window !== 'undefined') {
-  analytics = getAnalytics(app);
+ // analytics = getAnalytics(app);
 }
 
 

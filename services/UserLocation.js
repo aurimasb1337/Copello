@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 import BackgroundService from 'react-native-background-actions';
-
+import Geolocation from 'react-native-geolocation-service';
 
 
 const options = {
@@ -23,36 +23,38 @@ const options = {
 
 
 
-const LOCATION_TRACKING = 'location-tracking';
 
-var l1;
-var l2;
 
 function UserLocation() {
 
-    const [locationStarted, setLocationStarted] = React.useState(false);
+     
 
-    const sleep = (time) => new Promise((resolve) => setTimeout(() => resolve(), time));
-    const veryIntensiveTask = async (taskDataArguments) => {
-        // Example of an infinite loop task
-        const { delay } = taskDataArguments;
-        await new Promise( async (resolve) => {
-            for (let i = 0; BackgroundService.isRunning(); i++) {
-                console.log(i);
-                await sleep(delay);
-            }
-        });
-    };
+
 
     React.useEffect(() => {
         const config = async () => {
-            await BackgroundService.start(veryIntensiveTask, options);
+      
             let resf = await Location.requestForegroundPermissionsAsync();
             let resb = await Location.requestBackgroundPermissionsAsync();
             if (resf.status != 'granted' && resb.status !== 'granted') {
-                console.log('Permission to access location was denied');
+                
             } else {
                 console.log('Permission to access location granted');
+                Geolocation.watchPosition(
+                    (position) => {
+                    console.log('locationas' + position)
+                    },
+                    (error) => {
+                      console.log(error.code, error.message);
+                    },
+                    {
+                      enableHighAccuracy: true,
+                      timeout: 20000,
+                      maximumAge: 4000,
+                      distanceFilter: 20,
+                      interval: 5000
+                    },
+                  );
             }
         };
         config();
@@ -63,7 +65,7 @@ function UserLocation() {
 
     return (
         <View>
-          {locationStarted ?
+          {/* {locationStarted ?
               <TouchableOpacity >
                   <Text style={styles.btnText}>Stop Tracking</Text>
               </TouchableOpacity>
@@ -71,7 +73,7 @@ function UserLocation() {
               <TouchableOpacity >
                   <Text style={styles.btnText}>Start Tracking</Text>
               </TouchableOpacity>
-          }
+          } */}
         </View>
     );
 }

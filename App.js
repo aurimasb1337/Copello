@@ -4,7 +4,22 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import MapActivity from "./activities/MapActivity";
 import { app } from "./firebase/config";
 import { ref, onValue, getDatabase, set } from "firebase/database"
-
+import * as TaskManager from 'expo-task-manager'
+// const TASK_FETCH_LOCATION = 'background-location-task';
+//    // 1 define the task passing its name and a callback that will be called whenever the location changes
+//    TaskManager.defineTask(TASK_FETCH_LOCATION, async ({ data: { locations }, error }) => {
+//     if (error) {
+//       console.error(error);
+//       return;
+//     }
+//     const [location] = locations;
+//   console.log('app.js', location)
+//     try {
+     
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   });
 export default function App() {
   
   const [fontsLoaded] = useFonts({

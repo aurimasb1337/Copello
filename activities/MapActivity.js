@@ -13,7 +13,7 @@ import AnimatedCarousel from '../carousel/AnimatedCarousel';
 import * as Location from 'expo-location';
 import ExpoLocation from "../services/ExpoLocation";
 import UserLocation from "../services/UserLocation";
-
+import {PulseAnimation} from 'react-native-animated-pulse';
 
 
 
@@ -145,6 +145,7 @@ useEffect(() => {
                 enableHighAccuracy: true,
                 timeInterval: 5
     });
+    
     setLocation(location.coords);
 
   })();
@@ -212,6 +213,7 @@ useEffect(() => {
     >
       <UserLocation/>
    <ExpoLocation/>
+   
       <MapView
       provider={PROVIDER_GOOGLE}
       ref={mapRef}
@@ -231,7 +233,7 @@ useEffect(() => {
       >
        
         {
-          locations.map((loc, key) => <Marker key={key}
+          locations.filter((x) => x.latitude!==activeLoc?.latitude && x.longitude!==activeLoc?.longitude).map((loc, key) => <Marker key={key}
           // title={loc.street}
           // description={loc.details}
      
@@ -246,6 +248,21 @@ useEffect(() => {
       </View> */}
           </Marker>
           )
+        }
+
+        {
+          activeLoc && <Marker key={'l1'}
+      
+     
+          coordinate={{latitude:activeLoc.latitude, longitude: activeLoc.longitude}} 
+         
+       
+          >
+
+      <View style={{padding:50}} >
+      <PulseAnimation color={'#34ebba'}  diameter={100} speed={1800} numPulses={2}  duration={3000} ></PulseAnimation>
+      </View>
+          </Marker>
         }
 
 

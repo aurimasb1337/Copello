@@ -26,12 +26,21 @@
         "googleMaps": {
           "apiKey": "AIzaSyBHACzImxOl4LJZAfYd9Nu8xD6mGkXSLCk"
         }
-      }
+      },
+      "permissions": [
+	      "ACCESS_BACKGROUND_LOCATION"
+	    ]
     },
     "ios": {
       "supportsTablet": true,
       "config": {
         "googleMapsApiKey": "AIzaSyBHACzImxOl4LJZAfYd9Nu8xD6mGkXSLCk"
+      },
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       }
     },
     "extra": {

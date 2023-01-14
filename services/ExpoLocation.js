@@ -10,26 +10,14 @@ import * as TaskManager from 'expo-task-manager'
 function ExpoLocation() {
 
    
-    const TASK_FETCH_LOCATION = 'TASK_FETCH_LOCATION';
+    const TASK_FETCH_LOCATION = 'background-location-task';
 
-    // 1 define the task passing its name and a callback that will be called whenever the location changes
-    TaskManager.defineTask(TASK_FETCH_LOCATION, async ({ data: { locations }, error }) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
-      const [location] = locations;
-      try {
-       
-      } catch (err) {
-        console.error(err);
-      }
-    });
+ 
     
    
 
     React.useEffect(() => {
-     console.log('mount')
+     
          // 2 start the task
     Location.startLocationUpdatesAsync(TASK_FETCH_LOCATION, {
         accuracy: Location.Accuracy.Highest,
