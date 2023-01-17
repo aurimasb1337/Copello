@@ -1,8 +1,8 @@
 {
-  "name": "Copello",
+  "name": "copello",
   "displayName": "Copello",
   "expo": {
-    "name": "Copello",
+    "name": "copello",
     "slug": "copello",
     "version": "1.0.0",
     "sdkVersion": "47.0.0",

@@ -60,6 +60,6 @@
     "eject": "expo eject"
   },
   "private": true,
-  "name": "copello-ios",
+  "name": "copello",
   "version": "1.0.0"
 }
